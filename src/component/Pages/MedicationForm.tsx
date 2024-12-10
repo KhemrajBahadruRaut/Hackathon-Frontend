@@ -1,46 +1,25 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Row, Col, Typography, message } from "antd";
-import { PlusOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Form, Input, Button, Typography, message } from "antd";
 
 const { Title } = Typography;
 
-const MedicationForm: React.FC = () => {
-  const [medications, setMedications] = useState([
-    { medicine: "", frequency: "" },
-  ]);
-
-  const handleAddMedication = () => {
-    setMedications([...medications, { medicine: "", frequency: "" }]);
-  };
+const Medication: React.FC = () => {
+  const [medication, setMedication] = useState({ medicine: "", frequency: "" });
 
   const handleInputChange = (
-    index: number,
     field: "medicine" | "frequency",
     value: string
   ) => {
-    const updatedMedications = [...medications];
-    updatedMedications[index][field] = value;
-    setMedications(updatedMedications);
-  };
-
-  const handleRemoveMedication = (index: number) => {
-    const updatedMedications = medications.filter((_, i) => i !== index);
-    setMedications(updatedMedications);
-  };
-
-  const handleClearAll = () => {
-    if (window.confirm("Are you sure you want to remove all medicine details?")) {
-      setMedications([]);
-    }
+    setMedication({ ...medication, [field]: value });
   };
 
   const handleSave = () => {
-    if (medications.some((med) => !med.medicine || !med.frequency)) {
+    if (!medication.medicine || !medication.frequency) {
       message.error("Please fill in all fields before saving.");
       return;
     }
-    console.log("Medications:", medications);
-    message.success("Medications saved successfully!");
+    console.log("Medication:", medication);
+    message.success("Medication saved successfully!");
   };
 
   return (
@@ -49,58 +28,33 @@ const MedicationForm: React.FC = () => {
         Medication Details
       </Title>
       <Form layout="vertical">
-        <Form.Item label="Prescribed By" required>
-          <Input placeholder="Prescribed By" style={styles.input} />
+        <Form.Item label="Prescribed By">
+          <Input placeholder="Doctor's Name" style={styles.input} />
         </Form.Item>
 
-        <div style={{ display:"flex", justifyContent:"space-between", marginBottom: "20px" }}>
-          <Button type="primary" onClick={handleAddMedication} icon={<PlusOutlined />}>
-            Add Medication
-          </Button>
-          {medications.length > 0 && (
-            <Button
-              type="default"
-              onClick={handleClearAll}
-              style={{ marginLeft: "10px", backgroundColor: "grey", color: "white" }}
-            >
-              Clear All
-            </Button>
-          )}
-        </div>
+        <Title level={4} style={styles.subTitle}>
+          Medicines
+        </Title>
+        <Form.Item label="Medicine Name" required>
+          <Input
+            placeholder="Enter Medicine Name"
+            value={medication.medicine}
+            onChange={(e) => handleInputChange("medicine", e.target.value)}
+            style={styles.input}
+          />
+        </Form.Item>
 
-        {medications.map((medication, index) => (
-          <Row key={index} gutter={16} style={{ marginBottom: "10px" }}>
-            <Col span={10}>
-              <Input
-                placeholder="Medicine Name"
-                value={medication.medicine}
-                onChange={(e) =>
-                  handleInputChange(index, "medicine", e.target.value)
-                }
-              />
-            </Col>
-            <Col span={10}>
-              <Input
-                placeholder="Frequency"
-                value={medication.frequency}
-                onChange={(e) =>
-                  handleInputChange(index, "frequency", e.target.value)
-                }
-              />
-            </Col>
-            <Col span={4}>
-              <Button
-                type="primary"
-                danger
-                icon={<DeleteOutlined />}
-                onClick={() => handleRemoveMedication(index)}
-              />
-            </Col>
-          </Row>
-        ))}
+        <Form.Item label="Frequency" required>
+          <Input
+            placeholder="Enter Frequency"
+            value={medication.frequency}
+            onChange={(e) => handleInputChange("frequency", e.target.value)}
+            style={styles.input}
+          />
+        </Form.Item>
 
         <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button type="primary" onClick={handleSave}>
+          <Button style={styles.submitButton} type="primary" onClick={handleSave}>
             Save
           </Button>
         </div>
@@ -111,7 +65,16 @@ const MedicationForm: React.FC = () => {
 
 // Inline Styles
 const styles = {
+
+  submitButton: {
+    width: "100%",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    border: "none",
+  },
+  
   container: {
+
     backgroundColor: "#ffffff",
     borderRadius: "12px",
     boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
@@ -125,9 +88,14 @@ const styles = {
     color: "#9c3af9",
     marginBottom: "20px",
   },
+  subTitle: {
+    marginTop: "20px",
+    marginBottom: "10px",
+    color: "#333",
+  },
   input: {
     width: "100%",
   },
 };
 
-export default MedicationForm;
+export default Medication;

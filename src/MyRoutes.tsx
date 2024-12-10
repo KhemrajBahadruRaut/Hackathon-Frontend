@@ -3,19 +3,31 @@ import LoginPage from "./component/Login";
 import Dashboard from "./component/Dashboard";
 import AddPatient from "./component/Pages/AddPatient";
 import HospitalRegistrationForm from "./component/Pages/RegistrationForm";
-import MedicationForm from "./component/Pages/MedicationForm";
 import CheckUpDetails from "./component/Pages/Checkups";
+import Medication from "./component/Pages/MedicationForm";
+import DiagnosisForm from "./component/Pages/DiagnosisForm";
+// import MedicationForm from "./component/Pages/MedicationDemo";
 
 function MyRoutes() {
   return (
     <BrowserRouter>
       <Routes>
+
+
+        {/*  FOR DEMO OF MEDICATION TO ADD MULTIPLE MEDICATION
+        
+        <Route path="/mdetails" element={<MedicationForm/>}></Route>
+
+        */}
+
         <Route path="/" element={<LoginPage />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/addpatient" element={<AddPatient />}></Route>
         <Route path="/register" element={<HospitalRegistrationForm/>}></Route>
-        <Route path="/mdetails" element={<MedicationForm/>}></Route>
         <Route path="/cdetails" element={<CheckUpDetails/>}></Route>
+        <Route path="/mdetails" element={<Medication/>}></Route>
+        <Route path="/diagnosis" element={<DiagnosisForm/>}></Route>
+
 
       </Routes>
     </BrowserRouter>
