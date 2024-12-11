@@ -1,7 +1,7 @@
+import { Button, DatePicker, Form, Input, Typography, message } from "antd";
 import React from "react";
-import { Form, Input, DatePicker, Button, Typography, message } from "antd";
-import { DiagnosisInformationControllerService, DiagnosisInformationDto } from "../../services/openapi";
 import { useParams } from "react-router-dom";
+import { DiagnosisInformationControllerService, DiagnosisInformationDto } from "../../services/openapi";
 
 const { Title } = Typography;
 

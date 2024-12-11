@@ -1,7 +1,8 @@
+import { Button, Form, Input, Typography, message } from "antd";
 import React, { useState } from "react";
-import { Form, Input, Button, Typography, message } from "antd";
 
 const { Title } = Typography;
+
 
 const Medication: React.FC = () => {
   const [medication, setMedication] = useState({ medicine: "", frequency: "" });

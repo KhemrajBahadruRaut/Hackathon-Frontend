@@ -1,13 +1,26 @@
 import React from "react";
-import { Form, Input, DatePicker, Button, Typography } from "antd";
+import { Form, Input, DatePicker, Button, Typography, message } from "antd";
+import { CheckUpInformationControllerService, CheckUpInformationDto } from "../../services/openapi";
+import { useParams } from "react-router-dom";
 
 const { Title } = Typography;
 
-const CheckUpDetails: React.FC = () => {
+const Checkups: React.FC = () => {
   const [form] = Form.useForm();
+  let { patientId } = useParams();
 
-  const onFinish = (values: any) => {
-    console.log("Form Data Submitted:", values);
+  const handleSubmit = async (values: CheckUpInformationDto) => {
+    console.log("checkUp Data:", values);
+    try{
+      values.patientId=patientId!;
+      await CheckUpInformationControllerService.save3(values);
+      message.success("CheckUp data saved successfully");
+        form.resetFields();
+      
+    }
+    catch{
+      message.error("error while saving checkup information")
+    }
   };
 
   return (
