@@ -91,12 +91,16 @@ const Dashboard: React.FC = () => {
       console.log(setLoading(false));
     }
   };
+  const navigate = useNavigate();
 
+  const handleClick = (path:string) => {
+    navigate(path+"/"+patientData?.patientId); // Navigate to the desired route
+  };
   const dropdownMenu = (
     <Menu>
-      <Menu.Item key="1" >Add Medication</Menu.Item>
-      <Menu.Item key="2">Add Diagnosis</Menu.Item>
-      <Menu.Item key="3">Add Checkup</Menu.Item>
+      <Menu.Item key="1" onClick={() => handleClick('/mdetails')} >Add Medication</Menu.Item>
+      <Menu.Item key="2" onClick={() => handleClick('/diagnosis')}>Add Diagnosis</Menu.Item>
+      <Menu.Item key="3" onClick={() => handleClick('/cdetails')}>Add Checkup</Menu.Item>
     </Menu>
   );
 
