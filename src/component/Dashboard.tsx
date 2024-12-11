@@ -187,7 +187,7 @@ const Dashboard: React.FC = () => {
               name="dob"
               rules={[{ required: true, message: "Enter date of birth" }]}
             >
-              <Input placeholder="YYYY-MM-DD" />
+              <Input type="date" />
             </Form.Item>
             <Form.Item
               label="National ID"
