@@ -24,9 +24,9 @@ function MyRoutes() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/addpatient" element={<AddPatient />}></Route>
         <Route path="/register" element={<HospitalRegistrationForm/>}></Route>
-        <Route path="/cdetails" element={<CheckUpDetails/>}></Route>
-        <Route path="/mdetails" element={<Medication/>}></Route>
-        <Route path="/diagnosis" element={<DiagnosisForm/>}></Route>
+        <Route path="/cdetails/:patientId" element={<CheckUpDetails/>}></Route>
+        <Route path="/mdetails/:patientId" element={<Medication/>}></Route>
+        <Route path="/diagnosis/:patientId" element={<DiagnosisForm/>}></Route>
 
 
       </Routes>

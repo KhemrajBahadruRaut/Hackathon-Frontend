@@ -1,26 +1,26 @@
-import React, { useState } from "react";
 import {
-  Layout,
-  Input,
+  LogoutOutlined,
+  PlusOutlined,
+  RollbackOutlined,
+  SearchOutlined,
+  UserAddOutlined,
+} from "@ant-design/icons";
+import {
   Button,
-  Table,
-  Tabs,
-  Form,
-  Spin,
-  message,
   Card,
   Dropdown,
+  Form,
+  Input,
+  Layout,
   Menu,
+  Spin,
+  Table,
+  Tabs,
   Typography,
+  message,
 } from "antd";
-import {
-  SearchOutlined,
-  PlusOutlined,
-  LogoutOutlined,
-  UserAddOutlined,
-  RollbackOutlined,
-} from "@ant-design/icons";
-import AppFooter from "./AppFooter";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   CheckUpInformationControllerService,
   CheckUpInformationDto,
@@ -31,7 +31,7 @@ import {
   PatientInformationControllerService,
   PatientInformationDto,
 } from "../services/openapi";
-import { useNavigate } from "react-router-dom";
+import AppFooter from "./AppFooter";
 
 const { Header, Content } = Layout;
 const { TabPane } = Tabs;
@@ -60,6 +60,10 @@ const Dashboard: React.FC = () => {
     nationalId: string;
   }) => {
     setLoading(true);
+    setPatientData(null);
+    setCheckups([]);
+    setDiagnosis([]);
+    setMedication([]);
     try {
       const patient = await PatientInformationControllerService.get(
         _values.lastName,
@@ -90,7 +94,7 @@ const Dashboard: React.FC = () => {
 
   const dropdownMenu = (
     <Menu>
-      <Menu.Item key="1">Add Medication</Menu.Item>
+      <Menu.Item key="1" >Add Medication</Menu.Item>
       <Menu.Item key="2">Add Diagnosis</Menu.Item>
       <Menu.Item key="3">Add Checkup</Menu.Item>
     </Menu>

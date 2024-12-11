@@ -1,14 +1,26 @@
 import React from "react";
 import { Form, Input, DatePicker, Button, Typography, message } from "antd";
+import { DiagnosisInformationControllerService, DiagnosisInformationDto } from "../../services/openapi";
+import { useParams } from "react-router-dom";
 
 const { Title } = Typography;
 
 const DiagnosisForm: React.FC = () => {
   const [form] = Form.useForm();
+  let { patientId } = useParams();
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = async (values: DiagnosisInformationDto) => {
     console.log("Diagnosis Data:", values);
-    message.success("Diagnosis details saved successfully!");
+      try{
+        values.patientId=patientId!;
+        await DiagnosisInformationControllerService.save2(values);
+        message.success("Diagnosis data saved successfully!");
+        form.resetFields();
+
+      }
+      catch{
+        message.error("error while saving diagnosis information")
+      }
   };
 
   const handleFailedSubmit = (errorInfo: any) => {
