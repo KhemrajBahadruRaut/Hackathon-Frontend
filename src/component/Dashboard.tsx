@@ -32,6 +32,7 @@ import {
   PatientInformationDto,
 } from "../services/openapi";
 import AppFooter from "./AppFooter";
+import AboutUs from "./Pages/AboutUs";
 
 const { Header, Content } = Layout;
 const { TabPane } = Tabs;
@@ -135,7 +136,7 @@ const Dashboard: React.FC = () => {
   };
 
   return (
-    <Layout style={{ height: "100vh", background: "#f0f2f5" }}>
+        <Layout style={{ background: "#f0f2f5" }}>
       <Header
         style={{
           background: "#001529",
@@ -310,6 +311,7 @@ const Dashboard: React.FC = () => {
             </div>
           </Card>
         )}
+        <AboutUs/>
       </Content>
       <AppFooter></AppFooter>
     </Layout>

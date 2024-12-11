@@ -1,5 +1,6 @@
 import React from "react";
 import { Form, Input, DatePicker, Button, Typography } from "antd";
+import Navbar from "../Navbar";
 
 const { Title } = Typography;
 
@@ -11,6 +12,9 @@ const CheckUpDetails: React.FC = () => {
   };
 
   return (
+    <Navbar >
+
+
     <div style={styles.container}>
       <Title level={3} style={styles.title}>
         Check-Up Details
@@ -20,13 +24,13 @@ const CheckUpDetails: React.FC = () => {
         layout="vertical"
         onFinish={onFinish}
         style={styles.form}
-      >
+        >
         {/* Date Visited Field */}
         <Form.Item
           label="Date Visited"
           name="dateVisited"
           rules={[{ required: true, message: "Please select the visit date!" }]}
-        >
+          >
           <DatePicker style={styles.input} />
         </Form.Item>
 
@@ -40,7 +44,7 @@ const CheckUpDetails: React.FC = () => {
               message: "Please enter the reason for the visit!",
             },
           ]}
-        >
+          >
           <Input
             placeholder="Enter the REASON fo visit "
             style={styles.input}
@@ -54,7 +58,7 @@ const CheckUpDetails: React.FC = () => {
           rules={[
             { required: true, message: "Please select the follow-up date!" },
           ]}
-        >
+          >
           <DatePicker style={styles.input} />
         </Form.Item>
 
@@ -66,6 +70,7 @@ const CheckUpDetails: React.FC = () => {
         </Form.Item>
       </Form>
     </div>
+</Navbar>
   );
 };
 // Styles

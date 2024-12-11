@@ -1,7 +1,11 @@
 import React from "react";
 import { Form, Input, DatePicker, Button, Typography, message } from "antd";
-import { DiagnosisInformationControllerService, DiagnosisInformationDto } from "../../services/openapi";
+import {
+  DiagnosisInformationControllerService,
+  DiagnosisInformationDto,
+} from "../../services/openapi";
 import { useParams } from "react-router-dom";
+import Navbar from "../Navbar";
 
 const { Title } = Typography;
 
@@ -11,16 +15,14 @@ const DiagnosisForm: React.FC = () => {
 
   const handleSubmit = async (values: DiagnosisInformationDto) => {
     console.log("Diagnosis Data:", values);
-      try{
-        values.patientId=patientId!;
-        await DiagnosisInformationControllerService.save2(values);
-        message.success("Diagnosis data saved successfully!");
-        form.resetFields();
-
-      }
-      catch{
-        message.error("error while saving diagnosis information")
-      }
+    try {
+      values.patientId = patientId!;
+      await DiagnosisInformationControllerService.save2(values);
+      message.success("Diagnosis data saved successfully!");
+      form.resetFields();
+    } catch {
+      message.error("error while saving diagnosis information");
+    }
   };
 
   const handleFailedSubmit = (errorInfo: any) => {
@@ -29,52 +31,60 @@ const DiagnosisForm: React.FC = () => {
   };
 
   return (
-    <div style={styles.container}>
-      <Title level={3} style={styles.title}>
-        Diagnosis Form
-      </Title>
-      <Form
-        form={form}
-        layout="vertical"
-        onFinish={handleSubmit}
-        onFinishFailed={handleFailedSubmit}
-        style={styles.form}
-      >
-        {/* Date Field */}
-        <Form.Item
-          label="Date"
-          name="date"
-          rules={[{ required: true, message: "Please select the date!" }]}
+    <Navbar>
+      <div style={styles.container}>
+        <Title level={3} style={styles.title}>
+          Diagnosis Form
+        </Title>
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleSubmit}
+          onFinishFailed={handleFailedSubmit}
+          style={styles.form}
         >
-          <DatePicker style={styles.input} />
-        </Form.Item>
+          {/* Date Field */}
+          <Form.Item
+            label="Date"
+            name="date"
+            rules={[{ required: true, message: "Please select the date!" }]}
+          >
+            <DatePicker style={styles.input} />
+          </Form.Item>
 
-        {/* Diagnosis Name Field */}
-        <Form.Item
-          label="Diagnosis Name"
-          name="diagnosisName"
-          rules={[{ required: true, message: "Please enter the diagnosis name!" }]}
-        >
-          <Input placeholder="Enter Diagnosis Name" style={styles.input} />
-        </Form.Item>
+          {/* Diagnosis Name Field */}
+          <Form.Item
+            label="Diagnosis Name"
+            name="diagnosisName"
+            rules={[
+              { required: true, message: "Please enter the diagnosis name!" },
+            ]}
+          >
+            <Input placeholder="Enter Diagnosis Name" style={styles.input} />
+          </Form.Item>
 
-        {/* Result Field */}
-        <Form.Item
-          label="Result"
-          name="result"
-          rules={[{ required: true, message: "Please enter the result!" }]}
-        >
-        <Input placeholder="Enter Diagnosis Result" style={styles.input} />
-        </Form.Item>
+          {/* Result Field */}
+          <Form.Item
+            label="Result"
+            name="result"
+            rules={[{ required: true, message: "Please enter the result!" }]}
+          >
+            <Input placeholder="Enter Diagnosis Result" style={styles.input} />
+          </Form.Item>
 
-        {/* Submit Button */}
-        <Form.Item>
-          <Button type="primary" htmlType="submit" style={styles.submitButton}>
-            Save
-          </Button>
-        </Form.Item>
-      </Form>
-    </div>
+          {/* Submit Button */}
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={styles.submitButton}
+            >
+              Save
+            </Button>
+          </Form.Item>
+        </Form>
+      </div>
+    </Navbar>
   );
 };
 

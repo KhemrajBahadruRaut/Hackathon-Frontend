@@ -6,6 +6,8 @@ import HospitalRegistrationForm from "./component/Pages/RegistrationForm";
 import CheckUpDetails from "./component/Pages/Checkups";
 import Medication from "./component/Pages/MedicationForm";
 import DiagnosisForm from "./component/Pages/DiagnosisForm";
+import Navbar from "./component/Navbar";
+import AboutUs from "./component/Pages/AboutUs";
 // import MedicationForm from "./component/Pages/MedicationDemo";
 
 function MyRoutes() {
@@ -21,12 +23,15 @@ function MyRoutes() {
         */}
 
         <Route path="/" element={<LoginPage />}></Route>
+        <Route path="/navbar" element={<Navbar/>}/>
+        <Route path="/about" element={<AboutUs/>}/>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/addpatient" element={<AddPatient />}></Route>
         <Route path="/register" element={<HospitalRegistrationForm/>}></Route>
-        <Route path="/cdetails/:patientId" element={<CheckUpDetails/>}></Route>
-        <Route path="/mdetails/:patientId" element={<Medication/>}></Route>
-        <Route path="/diagnosis/:patientId" element={<DiagnosisForm/>}></Route>
+        <Route path="/cdetails" element={<CheckUpDetails/>}></Route>
+        <Route path="/mdetails" element={<Medication/>}></Route>
+        <Route path="/diagnosis" element={<DiagnosisForm/>}></Route>
+
 
 
       </Routes>
