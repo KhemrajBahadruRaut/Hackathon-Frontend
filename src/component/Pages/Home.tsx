@@ -3,12 +3,12 @@ import { Button, Card, Col, Layout, Row, Space, Typography } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
-const { Title, Paragraph, Text } = Typography;
+const { Paragraph, Text } = Typography;
 
 const HomePage = () => {
     const navigate = useNavigate();
     const openLoginPage = () => {
-        const popupWindow = window.open(
+         window.open(
           "/nid-login.html",
           "National Identification Login Page",
           "width=600,height=800"

@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
   const [checkups, setCheckups] = useState<CheckUpInformationDto[]>([]);
   const [diagnosis, setDiagnosis] = useState<DiagnosisInformationDto[]>([]);
 const[hasWriteAccess,setHasWriteAccess]=useState(false);
-  const[authority,setAuthority]=useState();
+  const[,setAuthority]=useState();
   const [patientData, setPatientData] = useState<PatientInformationDto | null>(
     null
   );

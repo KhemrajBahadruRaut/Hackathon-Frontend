@@ -23,10 +23,6 @@ const MedicineForm: React.FC = () => {
         message.error("error while saving medicataion information")
       }
   };
-  const handleFailedSubmit = (errorInfo: any) => {
-    console.error("Validation Failed:", errorInfo);
-    message.error("Please fill in all required fields!");
-  };
   return (
     <Navbar>
 
