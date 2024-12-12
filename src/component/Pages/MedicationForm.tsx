@@ -1,102 +1,113 @@
-import { Button, Form, Input, Typography, message } from "antd";
-import React, { useState } from "react";
+import { Button, DatePicker, Form, Input, Typography, message } from "antd";
+import React from "react";
+import { useParams } from "react-router-dom";
+import { MedicationControllerService, MedicationDto } from "../../services/openapi";
+import Navbar from "../Navbar";
 
 const { Title } = Typography;
 
+const MedicineForm: React.FC = () => {
+  const [form] = Form.useForm();
+  let { patientId } = useParams();
 
-const Medication: React.FC = () => {
-  const [medication, setMedication] = useState({ medicine: "", frequency: "" });
+  const handleSubmit = async (values: MedicationDto) => {
+    console.log("Diagnosis Data:", values);
+      try{
+        values.patientId=patientId!;
+        await MedicationControllerService.save1(values);
+        message.success("Medication data saved successfully!");
+        form.resetFields();
 
-  const handleInputChange = (
-    field: "medicine" | "frequency",
-    value: string
-  ) => {
-    setMedication({ ...medication, [field]: value });
+      }
+      catch{
+        message.error("error while saving medicataion information")
+      }
   };
-
-  const handleSave = () => {
-    if (!medication.medicine || !medication.frequency) {
-      message.error("Please fill in all fields before saving.");
-      return;
-    }
-    console.log("Medication:", medication);
-    message.success("Medication saved successfully!");
+  const handleFailedSubmit = (errorInfo: any) => {
+    console.error("Validation Failed:", errorInfo);
+    message.error("Please fill in all required fields!");
   };
-
   return (
+    <Navbar>
+
     <div style={styles.container}>
       <Title level={3} style={styles.title}>
-        Medication Details
+       Medication Form
       </Title>
-      <Form layout="vertical">
-        <Form.Item label="Prescribed By">
-          <Input placeholder="Doctor's Name" style={styles.input} />
+      <Form
+        form={form}
+        layout="vertical"
+        onFinish={handleSubmit}
+        style={styles.form}
+        >
+        {/* Date Field */}
+        <Form.Item
+          label="date"
+          name="date"
+          rules={[{ required: true, message: "Please select the date!" }]}
+          >
+          <DatePicker style={styles.input} />
         </Form.Item>
 
-        <Title level={4} style={styles.subTitle}>
-          Medicines
-        </Title>
-        <Form.Item label="Medicine Name" required>
-          <Input
-            placeholder="Enter Medicine Name"
-            value={medication.medicine}
-            onChange={(e) => handleInputChange("medicine", e.target.value)}
-            style={styles.input}
-          />
+        {/* Diagnosis Name Field */}
+        <Form.Item
+          label="Medication Name"
+          name="medicineName"
+          rules={[{ required: true, message: "Please enter the Medicine name!" }]}
+        >
+          <Input placeholder="Enter Medication Name" style={styles.input} />
         </Form.Item>
 
-        <Form.Item label="Frequency" required>
-          <Input
-            placeholder="Enter Frequency"
-            value={medication.frequency}
-            onChange={(e) => handleInputChange("frequency", e.target.value)}
-            style={styles.input}
-          />
+        {/* Result Field */}
+        <Form.Item
+          label="frequency"
+          name="frequency"
+          rules={[{ required: true, message: "Please enter the result!" }]}
+          >
+        <Input placeholder="Enter Medication Result" style={styles.input} />
         </Form.Item>
 
-        <div style={{ textAlign: "center", marginTop: "20px" }}>
-          <Button style={styles.submitButton} type="primary" onClick={handleSave}>
+        {/* Submit Button */}
+        <Form.Item>
+          <Button type="primary" htmlType="submit" style={styles.submitButton}>
             Save
           </Button>
-        </div>
+        </Form.Item>
       </Form>
     </div>
+</Navbar>
   );
 };
 
-// Inline Styles
+// Inline styles
 const styles = {
-
-  submitButton: {
-    width: "100%",
-    backgroundColor: "#28a745",
-    color: "#fff",
-    border: "none",
-  },
-  
   container: {
-
-    backgroundColor: "#ffffff",
-    borderRadius: "12px",
-    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
-    padding: "20px",
+    // maxWidth: "500px",
     width: "50%",
+    padding: "20px",
+    borderRadius: "12px",
     margin: "50px auto",
-    fontFamily: "'Roboto', sans-serif",
+    
+    backgroundColor: "#ffffff",
+    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
   },
   title: {
     textAlign: "center" as const,
     color: "#9c3af9",
     marginBottom: "20px",
   },
-  subTitle: {
-    marginTop: "20px",
-    marginBottom: "10px",
-    color: "#333",
+  form: {
+    width: "100%",
   },
   input: {
     width: "100%",
   },
+  submitButton: {
+    width: "100%",
+    backgroundColor: "#28a745",
+    color: "#fff",
+    border: "none",
+  },
 };
 
-export default Medication;
+export default MedicineForm;

@@ -8,6 +8,7 @@ export type MedicationDto = {
     patientId: string;
     date: string;
     medicineName: string;
+    hospitalName?: string;
     frequency: string;
 };
 

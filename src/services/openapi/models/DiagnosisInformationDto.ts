@@ -9,5 +9,6 @@ export type DiagnosisInformationDto = {
     date: string;
     diagnosisName: string;
     result: string;
+    hospitalName?: string;
 };
 

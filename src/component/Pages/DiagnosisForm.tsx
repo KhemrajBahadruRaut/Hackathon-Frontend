@@ -2,6 +2,7 @@ import { Button, DatePicker, Form, Input, Typography, message } from "antd";
 import React from "react";
 import { useParams } from "react-router-dom";
 import { DiagnosisInformationControllerService, DiagnosisInformationDto } from "../../services/openapi";
+import Navbar from "../Navbar";
 
 const { Title } = Typography;
 
@@ -29,6 +30,8 @@ const DiagnosisForm: React.FC = () => {
   };
 
   return (
+    <Navbar>
+
     <div style={styles.container}>
       <Title level={3} style={styles.title}>
         Diagnosis Form
@@ -75,6 +78,8 @@ const DiagnosisForm: React.FC = () => {
         </Form.Item>
       </Form>
     </div>
+    </Navbar>
+
   );
 };
 

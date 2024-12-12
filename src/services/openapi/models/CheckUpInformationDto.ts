@@ -9,5 +9,6 @@ export type CheckUpInformationDto = {
     dateVisited: string;
     followUpDate: string;
     hospitalId: string;
+    hospitalName?: string;
 };
 

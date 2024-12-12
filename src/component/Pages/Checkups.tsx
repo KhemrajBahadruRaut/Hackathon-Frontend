@@ -1,11 +1,12 @@
+import { Button, DatePicker, Form, Input, Typography, message } from "antd";
 import React from "react";
-import { Form, Input, DatePicker, Button, Typography, message } from "antd";
-import { CheckUpInformationControllerService, CheckUpInformationDto } from "../../services/openapi";
 import { useParams } from "react-router-dom";
+import { CheckUpInformationControllerService, CheckUpInformationDto } from "../../services/openapi";
+import Navbar from "../Navbar";
 
 const { Title } = Typography;
 
-const Checkups: React.FC = () => {
+const CheckUpDetails: React.FC = () => {
   const [form] = Form.useForm();
   let { patientId } = useParams();
 
@@ -22,8 +23,13 @@ const Checkups: React.FC = () => {
       message.error("error while saving checkup information")
     }
   };
-
+  const handleFailedSubmit = (errorInfo: any) => {
+    console.error("Validation Failed:", errorInfo);
+    message.error("Please fill in all required fields!");
+  };
   return (
+    <Navbar>
+
     <div style={styles.container}>
       <Title level={3} style={styles.title}>
         Check-Up Details
@@ -31,7 +37,8 @@ const Checkups: React.FC = () => {
       <Form
         form={form}
         layout="vertical"
-        onFinish={onFinish}
+        onFinish={handleSubmit}
+        onFinishFailed={handleFailedSubmit}
         style={styles.form}
       >
         {/* Date Visited Field */}
@@ -46,7 +53,7 @@ const Checkups: React.FC = () => {
         {/* Reason of Visit Field */}
         <Form.Item
           label="Reason of Visit"
-          name="reasonOfVisit"
+          name="reason"
           rules={[
             {
               required: true,
@@ -63,7 +70,7 @@ const Checkups: React.FC = () => {
         {/* Next Follow-up Date Field */}
         <Form.Item
           label="Next Follow-up Date"
-          name="nextFollowUpDate"
+          name="followUpDate"
           rules={[
             { required: true, message: "Please select the follow-up date!" },
           ]}
@@ -79,6 +86,8 @@ const Checkups: React.FC = () => {
         </Form.Item>
       </Form>
     </div>
+    </Navbar>
+
   );
 };
 // Styles

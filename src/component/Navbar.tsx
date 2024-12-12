@@ -3,15 +3,28 @@ import { LogoutOutlined, RollbackOutlined } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
 import AppFooter from "./AppFooter";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { jwtDecode } from "jwt-decode";
 const Navbar: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
 
     const navigate = useNavigate();
+    const[hospitalName,setHospitalName]=useState()
+
     const logout=()=>{
+      localStorage.removeItem("authtoken")
       navigate('/');
     };
     const  back=()=>{
       navigate('/dashboard');
     };
+    useEffect(() => {
+      const token = localStorage.getItem('authtoken'); // Replace with your token storage method
+  
+      if (token) {
+        const decodedToken = jwtDecode(token) as any ;
+        setHospitalName(decodedToken.name);
+      }
+    }, []);
   return (
     <>
       <Layout style={{ height: "100vh", background: "#f0f2f5" }}>
@@ -45,7 +58,7 @@ const Navbar: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
             >
               back
             </Button>
-            <span style={{ paddingTop: "4px" }}>(Patan Hospital)</span>
+            <span style={{ paddingTop: "4px" }}>({hospitalName})</span>
           </div>
         </Header>
         <div>{children}</div>
@@ -56,3 +69,4 @@ const Navbar: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
 };
 
 export default Navbar;
+
