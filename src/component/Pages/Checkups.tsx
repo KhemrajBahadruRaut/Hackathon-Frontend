@@ -40,13 +40,13 @@ const CheckUpDetails: React.FC = () => {
         onFinish={handleSubmit}
         onFinishFailed={handleFailedSubmit}
         style={styles.form}
-      >
+        >
         {/* Date Visited Field */}
         <Form.Item
           label="Date Visited"
           name="dateVisited"
           rules={[{ required: true, message: "Please select the visit date!" }]}
-        >
+          >
           <DatePicker style={styles.input} />
         </Form.Item>
 
@@ -60,7 +60,7 @@ const CheckUpDetails: React.FC = () => {
               message: "Please enter the reason for the visit!",
             },
           ]}
-        >
+          >
           <Input
             placeholder="Enter the REASON fo visit "
             style={styles.input}
@@ -74,7 +74,7 @@ const CheckUpDetails: React.FC = () => {
           rules={[
             { required: true, message: "Please select the follow-up date!" },
           ]}
-        >
+          >
           <DatePicker style={styles.input} />
         </Form.Item>
 

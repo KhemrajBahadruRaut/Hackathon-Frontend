@@ -185,7 +185,7 @@ const SelfInformation : React.FC = () => {
                     
                   }))}
                   columns={columnsMedication}
-                  pagination={false}
+                  pagination={{}}
                   />
               </TabPane>
               <TabPane tab="Diagnosis" key="2">
@@ -195,7 +195,7 @@ const SelfInformation : React.FC = () => {
                     ...diag
                   }))}
                   columns={columnsDiagnosis}
-                  pagination={false}
+                  pagination={{}}
                   />
               </TabPane>
               <TabPane tab="Checkups" key="3">
@@ -205,7 +205,8 @@ const SelfInformation : React.FC = () => {
                     ...check
                   }))}
                   columns={columnsCheckups}
-                  pagination={false}
+                  pagination={{}}
+             
                   />
               </TabPane>
               <TabPane tab="Activity Logs" key="4">
@@ -215,7 +216,7 @@ const SelfInformation : React.FC = () => {
                     ...log
                   }))}
                   columns={columnsActivityLog}
-                  pagination={false}
+                  pagination={{}}
                   />
               </TabPane>
             </Tabs>

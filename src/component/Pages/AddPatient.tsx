@@ -172,7 +172,7 @@ const AddPatientForm: React.FC = () => {
               <Select placeholder="Select Blood Group">
                 <Option value="A+">A+</Option>
                 <Option value="A-">A-</Option>
-  
+                
                 <Option value="O+">O+</Option>
                 <Option value="O-">O-</Option>
                 <Option value="B+">B+</Option>

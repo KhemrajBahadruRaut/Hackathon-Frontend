@@ -254,7 +254,7 @@ const[hasWriteAccess,setHasWriteAccess]=useState(false);
                     
                   }))}
                   columns={columnsMedication}
-                  pagination={false}
+                  pagination={{}}
                   />
               </TabPane>
               <TabPane tab="Diagnosis" key="2">
@@ -264,7 +264,7 @@ const[hasWriteAccess,setHasWriteAccess]=useState(false);
                     ...diag
                   }))}
                   columns={columnsDiagnosis}
-                  pagination={false}
+                  pagination={{}}
                   />
               </TabPane>
               <TabPane tab="Checkups" key="3">
@@ -274,7 +274,7 @@ const[hasWriteAccess,setHasWriteAccess]=useState(false);
                     ...check
                   }))}
                   columns={columnsCheckups}
-                  pagination={false}
+                  pagination={{}}
                   />
               </TabPane>
             </Tabs>
