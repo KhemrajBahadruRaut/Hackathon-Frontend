@@ -1,6 +1,6 @@
 import { SafetyCertificateOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Layout, Row, Space, Typography } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const { Header, Content, Footer } = Layout;
 const { Paragraph, Text } = Typography;
@@ -46,9 +46,11 @@ const HomePage = () => {
                   <Button type="primary" onClick={openLoginPage}>
                     Patient Login <UserOutlined />
                   </Button>
-                  <Button type="primary" href="/agency-login">
-                    Agency Login <SafetyCertificateOutlined />
+                  <Link to={"/agency-login"}>
+                  <Button type="primary">
+                  Agency Login <SafetyCertificateOutlined />
                   </Button>
+                  </Link>
                 </Space>
               </Card>
             </Col>
