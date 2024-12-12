@@ -1,10 +1,10 @@
-import React from "react";
 import { Button, Checkbox, Form, Input, message, Typography } from "antd";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   AgencyLoginControllerService,
   AgencyLoginDto,
 } from "../services/openapi";
-import { useNavigate } from "react-router-dom";
 
 const { Title } = Typography;
 
@@ -97,11 +97,7 @@ const LoginPage: React.FC = () => {
               </Button>
             </Form.Item>
           </Form>
-          <div style={{ textAlign: "center" }}>
-            <a href="#">Forgot password?</a>
-            <br />
-            <a href="/register">Don't have an account? Register now</a>
-          </div>
+          
         </div>
       </div>
   );
