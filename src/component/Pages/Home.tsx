@@ -38,7 +38,7 @@ const HomePage = () => {
         <div className="site-layout-content">
           <Row gutter={16}>
             <Col span={12}>
-              <Card title="Welcome to dotConnection" bordered={false}>
+              <Card title="Welcome to dotConnect" bordered={false}>
                 <Paragraph>
                   Your Centralized Medical Information Repository
                 </Paragraph>
@@ -55,7 +55,7 @@ const HomePage = () => {
               </Card>
             </Col>
             <Col span={12}>
-              <Card title="Why Choose dotConnection?" bordered={false}>
+              <Card title="Why Choose dotConnect?" bordered={false}>
                 <Paragraph>
                   <Text strong>Security:</Text> Your data is our priority.
                 </Paragraph>
